@@ -1,7 +1,7 @@
 package thread;
 
 /**
- * 	java 并发编程学习：Thread  nterrupt
+ * 	java 并发编程学习：Thread  Interrupt
  * 	参考：http://www.cnblogs.com/dolphin0520/p/3923737.html
  * Bathtub 2016-01-29
  */

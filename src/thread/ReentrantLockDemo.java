@@ -5,54 +5,65 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * 	java 并发编程学习：ReentrantLock
- * 	参考：http://www.cnblogs.com/dolphin0520/p/3923167.html
- * Bathtub 2016-01-29
+ * java 并发编程学习：ReentrantLock
+ * 参考：http://www.cnblogs.com/dolphin0520/p/3923167.html Bathtub
+ * 2016-01-29
  */
 public class ReentrantLockDemo
 {
 	private ArrayList<Integer> arrayList = new ArrayList<Integer>();
+
 	private Lock lock = new ReentrantLock();
-	
+
 	public static void main(String[] args)
 	{
 		final ReentrantLockDemo test = new ReentrantLockDemo();
-		
-		new Thread() {
-			public void run() 
+
+		new Thread()
+		{
+			public void run()
 			{
 				test.insert(Thread.currentThread());
 			}
 		}.start();
-		
-		new Thread() {
-			public void run() 
+
+		new Thread()
+		{
+			public void run()
 			{
 				test.insert(Thread.currentThread());
 			}
 		}.start();
 	}
-	
+
 	public void insert(Thread thread)
 	{
-//		Lock lock = new ReentrantLock();
-		lock.lock();
-		try
+		// Lock lock = new ReentrantLock();
+		// lock.lock();
+		//tryLock 立即尝试活动锁
+		if (lock.tryLock())
 		{
-			System.out.println(thread.getName() + "得到了锁");
-			for (int i = 0;i < 5; i++)
+			try
 			{
-				arrayList.add(i);
+				System.out.println(thread.getName() + "得到了锁");
+				for (int i = 0; i < 5; i++)
+				{
+					arrayList.add(i);
+				}
+			}
+			catch (Exception e)
+			{
+				// TODO: handle exception
+			}
+			finally
+			{
+				System.out.println(thread.getName() + "释放了锁");
+				lock.unlock();
 			}
 		}
-		catch (Exception e)
+		else
 		{
-			// TODO: handle exception
-		} finally
-		{
-			System.out.println(thread.getName() + "释放了锁");
-			lock.unlock();
+			System.out.println("获取锁失败");
 		}
-		
 	}
 }

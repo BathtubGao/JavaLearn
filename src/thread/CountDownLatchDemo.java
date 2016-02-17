@@ -57,9 +57,9 @@ public class CountDownLatchDemo
 		{
 			System.out.println("等待2个子线程执行完毕。。。。");
 			
-			latch.await(2000,TimeUnit.MILLISECONDS);
+			//latch.await(2000,TimeUnit.MILLISECONDS);
 			//两个都实现时 latch.await();有效
-			//latch.await();
+			latch.await();
 			System.out.println("2个子线程已经执行完毕");
 			System.out.println("继续执行主线程");
 		}

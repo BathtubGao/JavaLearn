@@ -6,8 +6,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * java 并发编程学习：ReentrantLock
- * 参考：http://www.cnblogs.com/dolphin0520/p/3923167.html Bathtub
- * 2016-01-29
+ * 参考：http://www.cnblogs.com/dolphin0520/p/3923167.html 
+ * Bathtub  2016-01-29
  */
 public class ReentrantLockDemo
 {
